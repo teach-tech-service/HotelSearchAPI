@@ -1,82 +1,98 @@
 let Hotels = [
     {
         city: "Krakow",
+        prize: 126,
         location: {
             name: "iris budget",
             street: "Armii krajowej",
             number: "11A",
-            prize: "126zł",
-            distance: 5
+            distance: 5,
+            latitude: 50.070596,
+            longitude: 19.895894
         }
     },
     {
         city: "Krakow",
+        prize: 170,
         location: {
             name: "Q Hotel Kraków",
             street: "Eljasza Radzikowskiego",
             number: "142",
-            prize: "170zł",
-            distance: 7
+            distance: 7,
+            latitude: 50.086652,
+            longitude: 19.893389
         }
     },
     {
         city: "Krakow",
+        prize: 158,
         location: {
             name: "Metropolo Krakow",
             street: "Orzechowa",
             number: "11",
-            prize: "158zł",
-            distance: 6
+            distance: 6,
+            latitude: 50.012699,
+            longitude: 19.92316
         }
     },
     {
         city: "Krakow",
+        prize: 333,
         location: {
             name: "Ibis kraków",
             street: "Władysława Syrokomli",
             number: "2",
-            prize: "333zł",
-            distance: 1
+            distance: 1,
+            latitude: 50.054981,
+            longitude: 19.925872
         }
     },
     {
         city: "Warszawa",
+        prize: 203,
         location: {
             name: "Novotel Hotels & Resorts",
             street: "Marszałkowska",
             number: "94",
-            prize: "203zł",
-            distance: 1
+            distance: 1,
+            latitude: 52.229393,
+            longitude: 21.013098
         }
     },
     {
         city: "Warszawa",
+        prize: 150,
         location: {
             name: "Golden Tulip Warsaw Centre",
             street: "Towarowa",
             number: "2",
-            prize: "150zł",
-            distance: 3
+            distance: 3,
+            latitude: 52.226221,
+            longitude: 20.988689
         }
     },
     {
         city: "Warszawa",
+        prize: 154,
         location: {
             name: "Sound Garden Hotel",
             street: "Żwirki i Wigury",
             number: "18",
-            prize: "154zł",
-            distance: 7
+            distance: 7,
+            latitude: 52.190483,
+            longitude: 20.982111
         }
     },
     {
         city: "Warszawa",
+        prize: 65,
         location: {
             name: "Hotel Tatamka",
             street: "Tamka",
             number: "30",
-            prize: "65zł",
-            distance: 5
+            distance: 5,
+            latitude: 52.237281,
+            longitude: 21.025495
         }
     }
 ];

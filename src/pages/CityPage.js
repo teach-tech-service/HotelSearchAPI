@@ -1,14 +1,13 @@
 import React from "react";
 import "./../App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { MyContext } from "../MyProvider";
+import { Link } from "react-router-dom";
+import { MyContext } from "../components/providers/HotelProvider";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Button from "@material-ui/core/Button";
-import { height } from "@material-ui/system";
 
 const styles = {
     box: {
@@ -33,13 +32,7 @@ const styles = {
     }
 };
 
-let city = "";
-
-const handleChange = event => {
-    city = event.target.value;
-};
-
-export default function CitiesList() {
+export default function City() {
     return (
         <React.Fragment>
             <Container maxWidth="xl" style={styles.box}>
@@ -52,9 +45,9 @@ export default function CitiesList() {
                                     <FormControl style={styles.form}>
                                         <InputLabel>Miasto</InputLabel>
                                         <NativeSelect
-                                            onChange={e =>
-                                                context.setCity(e.target.value)
-                                            }
+                                            onChange={e => {
+                                                context.setCity(e.target.value);
+                                            }}
                                         >
                                             <option value="Krakow">
                                                 Krakow
@@ -69,7 +62,7 @@ export default function CitiesList() {
                                         style={styles.btn}
                                     >
                                         <Link
-                                            to="/test"
+                                            to="/hotels"
                                             size="large"
                                             style={styles.link}
                                         >
