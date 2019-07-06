@@ -1,0 +1,80 @@
+.wrapper {
+  width: 100%;
+  height: 100vh;
+}
+
+.items {
+  position: absolute;
+  background-color: white;
+  height: 100%;
+  transition: all 1s;
+  width: 350px;
+  -webkit-box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.items > p,
+.items .btn-select {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.items__list {
+  display: inline-block;
+  max-height: 75%;
+  overflow-y: scroll;
+}
+
+.items__item {
+  position: relative;
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px;
+  margin: 15px;
+}
+
+.items__item:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+.item__close {
+  max-width: 100%;
+  height: auto;
+  width: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.item__info {
+  padding: 0 20px 0 0;
+}
+
+.item__img {
+  max-width: 100%;
+  width: 75px;
+  height: auto;
+  padding: 0 15px 0 0;
+}
+
+.item__address {
+  font-size: 1rem;
+}
+
+.item__address span {
+  display: block;
+}
+
+.btn-select {
+  background: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 30px;
+}
+
+.checked {
+  background-color: lightgray;
+}
