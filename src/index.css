@@ -12,7 +12,7 @@ code {
 #root {
   height: 100vh;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: scroll;
   justify-content: center;
   align-items: center;
 }

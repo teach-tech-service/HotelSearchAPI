@@ -5,7 +5,7 @@ export default function AtractionItem(props) {
         <li
             className="items__item"
             onClick={e => {
-                props.showBtn(e);
+                props.showBtn(e, props);
                 props.onClick(props);
             }}
         >
@@ -14,7 +14,7 @@ export default function AtractionItem(props) {
                     <span>
                         <b>{props.name}</b>
                     </span>
-                    <span>Cena za dobe: {props.prize}</span>
+                    <span>Cena: {props.prize}</span>
                 </p>
             </div>
         </li>

@@ -1,5 +1,6 @@
 let Hotels = [
     {
+        id: 1,
         city: "Krakow",
         prize: 126,
         location: {
@@ -12,6 +13,7 @@ let Hotels = [
         }
     },
     {
+        id: 2,
         city: "Krakow",
         prize: 170,
         location: {
@@ -24,6 +26,7 @@ let Hotels = [
         }
     },
     {
+        id: 3,
         city: "Krakow",
         prize: 158,
         location: {
@@ -36,6 +39,7 @@ let Hotels = [
         }
     },
     {
+        id: 4,
         city: "Krakow",
         prize: 333,
         location: {
@@ -48,6 +52,7 @@ let Hotels = [
         }
     },
     {
+        id: 5,
         city: "Warszawa",
         prize: 203,
         location: {
@@ -60,6 +65,7 @@ let Hotels = [
         }
     },
     {
+        id: 6,
         city: "Warszawa",
         prize: 150,
         location: {
@@ -72,6 +78,7 @@ let Hotels = [
         }
     },
     {
+        id: 7,
         city: "Warszawa",
         prize: 154,
         location: {
@@ -84,6 +91,7 @@ let Hotels = [
         }
     },
     {
+        id: 8,
         city: "Warszawa",
         prize: 65,
         location: {

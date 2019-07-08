@@ -14,15 +14,14 @@
   box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.items > p,
-.items .btn-select {
+.items>p, .items .btn-select {
   text-align: center;
   font-size: 1rem;
 }
 
 .items__list {
   display: inline-block;
-  max-height: 75%;
+  max-height: 65%;
   overflow-y: scroll;
 }
 
@@ -69,6 +68,8 @@
 }
 
 .btn-select {
+  text-decoration: none;
+  color: black;
   background: none;
   border: 1px solid black;
   border-radius: 10px;
@@ -77,4 +78,102 @@
 
 .checked {
   background-color: lightgray;
+}
+
+.attr {
+  height: 50%;
+  overflow-y: scroll;
+}
+
+.summary-btns {
+  display: flex;
+}
+
+/********Style for PrizeSlider**********/
+
+* {
+  font-family: "arial", "Helvetica", sans-serif;
+  ;
+}
+
+h1, h2, h3, h4 {
+  padding: 0;
+  margin: 0;
+}
+
+.example-1 {
+  margin-top: 50px;
+}
+
+.slider-container {
+  position: relative;
+}
+
+.slider-selected-scale {}
+
+.slider {
+  position: relative;
+  user-select: none;
+  margin-top: 10px;
+}
+
+.slider-scale {}
+
+.slider-thumb {
+  position: absolute;
+  background-color: gray;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  top: -8px;
+  touch-action: none;
+}
+
+.slider-thumb-min {
+  background-color: red;
+}
+
+.slider-thumb-max {
+  background-color: blue;
+}
+
+.slot {
+  text-align: center;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: none;
+}
+
+.scale-mark {
+  position: absolute;
+  border: 0.5px solid lightgray;
+  ;
+  height: 10px;
+}
+
+.slot-scale {
+  text-align: center;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: lightgray;
+  user-select: none;
+}
+
+.slot>.slider-thumb {
+  top: 3px
+}
+
+.line {
+  position: absolute;
+  background-color: lightgray;
+  height: 2px;
+  width: 20px;
+  top: 12px;
+}
+
+.line-selected {
+  height: 4px;
+  background-color: #191919;
 }
