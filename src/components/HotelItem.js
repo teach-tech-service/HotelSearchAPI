@@ -6,7 +6,6 @@ export default function HotelItem(props) {
             className="items__item"
             onClick={e => {
                 props.test1(e);
-                props.onClick(props);
             }}
         >
             <div className="item__info">

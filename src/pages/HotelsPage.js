@@ -2,11 +2,12 @@ import React from "react";
 import "./../App.css";
 import { MyContext } from "../components/providers/HotelProvider";
 import PrizeSlider from "./../components/PrizeSlider";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import data from "../data/data";
 import { cities } from "../data/cities";
 import HotelItem from "../components/HotelItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import Button from "@material-ui/core/Button";
 
 export class Hotels extends React.Component {
   constructor(props) {
@@ -76,14 +77,6 @@ export class Hotels extends React.Component {
     }
   };
 
-  getCenterMap = hotel1 => {
-    this.setState(prevState => {
-      prize: prevState.prize = hotel1.prize;
-      hotel: prevState.hotel.name = hotel1.name;
-      hotel: prevState.hotel.distance = hotel1.distance;
-    });
-  };
-
   HotelSearch = value => {
     this.setState(
       prevState => ({
@@ -99,7 +92,7 @@ export class Hotels extends React.Component {
   };
 
   render() {
-    const {google} = this.props;
+    const { google } = this.props;
     return (
       <MyContext.Consumer>
         {({
@@ -116,10 +109,6 @@ export class Hotels extends React.Component {
               google={this.props.google}
               zoom={this.state.zoom}
               initialCenter={{
-                lat: lat,
-                lng: lng
-              }}
-              center={{
                 lat: lat,
                 lng: lng
               }}
@@ -163,26 +152,36 @@ export class Hotels extends React.Component {
                       lat={item.location.latitude}
                       lng={item.location.longitude}
                       test1={this.showButton}
-                      onClick={this.getCenterMap}
                     />
                   ) : null;
                 })}
               </ul>
-              <p>*proszę wybrać jeden hotel</p>
-              {this.state.show ? (
-                <button className="btn-select">
-                  <Link
-                    to="/atractions"
-                    onClick={() => {
-                      setHotelPrize(this.state.prize);
-                      setHotelName(this.state.hotel.name);
-                      setHotelDistance(this.state.hotel.distance);
-                    }}
-                  >
-                    Wybierz
-                  </Link>
-                </button>
-              ) : null}
+              <p
+                style={{
+                  marginTop: 10,
+                  color: "gray",
+                  fontSize: 14,
+                  borderTop: "1px solid lightgray",
+                  width: "100%",
+                  paddingTop: 5
+                }}
+              >
+                * Proszę wybrać jeden hotel
+              </p>
+              <Button
+                variant="contained"
+                color="secondary"
+                className="btn-select"
+                style={{ visibility: this.state.show ? "visible" : "hidden" }}
+                onClick={() => {
+                  setHotelPrize(this.state.prize);
+                  setHotelName(this.state.hotel.name);
+                  setHotelDistance(this.state.hotel.distance);
+                  this.props.history.push(`/attractions/${city}`);
+                }}
+              >
+                Wybierz
+              </Button>
             </section>
           </div>
         )}
@@ -193,4 +192,4 @@ export class Hotels extends React.Component {
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyDzGLroP91cG9fH6lP5n1kkazfwptaaVr8"
-})(Hotels);
+})(withRouter(Hotels));

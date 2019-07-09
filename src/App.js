@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "./App.css";
 
 import City from "./pages/CityPage";
@@ -11,16 +11,18 @@ import { MyProvider } from "./components/providers/HotelProvider";
 
 function App() {
   return (
-    <Router>
-      <MyProvider>
+    <MyProvider>
+      <Router>
         <div className="App" />
-        <Route path="/" exact component={City} />
-        <Route path="/atractions" exact component={Atractions} />
-        <Route path="/summary" exact component={Summary} />
-        <Route path="/hotels/:city" exact component={Hotels} />
-        <Route component={NotFound} />
-      </MyProvider>
-    </Router>
+        <Switch>
+          <Route path="/" exact component={City} />
+          <Route path="/summary" component={Summary} />
+          <Route path="/hotels/:city" component={Hotels} />
+          <Route path="/atractions/:city" component={Atractions} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </MyProvider>
   );
 }
 
