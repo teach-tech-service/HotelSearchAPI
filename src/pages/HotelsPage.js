@@ -4,38 +4,23 @@ import { MyContext } from "../components/providers/HotelProvider";
 import PrizeSlider from "./../components/PrizeSlider";
 import { withRouter } from "react-router-dom";
 import data from "../data/data";
-import { cities } from "../data/cities";
 import HotelItem from "../components/HotelItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import Button from "@material-ui/core/Button";
 
 export class Hotels extends React.Component {
-  constructor(props) {
-    super(props);
-    let { city } = props.match.params,
-      isCity = false;
-    for (let i = 0; i < cities.length; i++) {
-      if (city == cities[i].city) {
-        isCity = true;
-        break;
-      }
-    }
-    if (!isCity) {
-      props.history.push("/");
-    }
-    this.state = {
-      zoom: 15,
-      show: false,
-      itemsChecked: 0,
-      prize: 0,
-      hotel: {
-        name: "",
-        distance: 0
-      },
-      min: 100,
-      max: 150
-    };
-  }
+  state = {
+    zoom: 15,
+    show: false,
+    itemsChecked: 0,
+    prize: 0,
+    hotel: {
+      name: "",
+      distance: 0
+    },
+    min: 200,
+    max: 400
+  };
 
   showButton = event => {
     if (!event.target.closest(".items__item").classList.contains("checked")) {
@@ -75,6 +60,15 @@ export class Hotels extends React.Component {
         }
       );
     }
+  };
+  getCenterMap = hotel => {
+    this.setState(prevState => {
+      prize: prevState.prize = hotel.prize;
+      hotel: prevState.hotel.name = hotel.name;
+      hotel: prevState.hotel.distance = hotel.distance;
+      latitude: prevState.latitude = hotel.lat;
+      longitude: prevState.longitude = hotel.lng;
+    });
   };
 
   HotelSearch = value => {
