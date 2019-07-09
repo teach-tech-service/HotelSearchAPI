@@ -14,8 +14,8 @@ export class MyProvider extends React.Component {
     attrNames: [],
 
     centerMap: {
-      lat: 0,
-      lng: 0
+      lng: 19.943089,
+      lat: 50.058561
     }
   };
 
