@@ -1,6 +1,6 @@
 import React from "react";
 import "./../App.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { MyContext } from "../components/providers/HotelProvider";
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -81,18 +81,19 @@ class City extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <Container maxWidth="xl" className={classes.container}>
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography
-                variant="h5"
-                component="h2"
-                className={classes.header}
-              >
-                Wybierz miasto które chcesz odwiedzić
-              </Typography>
-              <MyContext.Consumer>
-                {context => (
+        <MyContext.Consumer>
+          {context => (
+            <Container maxWidth="xl" className={classes.container}>
+              <Card className={classes.card}>
+                <CardContent>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    className={classes.header}
+                  >
+                    Wybierz miasto które chcesz odwiedzić
+                  </Typography>
+
                   <React.Fragment>
                     <FormControl className={classes.form}>
                       <InputLabel>Miasto</InputLabel>
@@ -126,23 +127,23 @@ class City extends React.Component {
                       </NativeSelect>
                     </FormControl>
                   </React.Fragment>
-                )}
-              </MyContext.Consumer>
-            </CardContent>
-            <CardActions className={classes.cardFooter}>
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.btn}
-                onClick={() => {
-                  this.props.history.push("/hotels");
-                }}
-              >
-                Dalej
-              </Button>
-            </CardActions>
-          </Card>
-        </Container>
+                </CardContent>
+                <CardActions className={classes.cardFooter}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.btn}
+                    onClick={() => {
+                      this.props.history.push(`/hotels`);
+                    }}
+                  >
+                    Dalej
+                  </Button>
+                </CardActions>
+              </Card>
+            </Container>
+          )}
+        </MyContext.Consumer>
       </React.Fragment>
     );
   }

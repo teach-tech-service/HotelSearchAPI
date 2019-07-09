@@ -4,34 +4,19 @@ import atractions from "../data/Atractions";
 import { Link } from "react-router-dom";
 import AtractionItem from "./../components/AtractionItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import Button from "@material-ui/core/Button";
 import { MyContext } from "../components/providers/HotelProvider";
-import { cities } from "../data/cities";
 
 let City = "";
 
 export class Atractions extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    let { city } = props.match.params,
-      isCity = false;
-    for (let i = 0; i < cities.length; i++) {
-      if (city == cities[i].city) {
-        isCity = true;
-        break;
-      }
-    }
-    if (!isCity) {
-      props.history.push("/");
-    }
-    this.state = {
-      show: false,
-      lng: 19.944544,
-      lat: 50.049683,
-      itemsChecked: 0,
-      prize: 0
-    };
-  }
+  state = {
+    show: false,
+    lng: 19.944544,
+    lat: 50.049683,
+    itemsChecked: 0,
+    prize: 0
+  };
 
   showButton = event => {
     if (!event.target.closest(".items__item").classList.contains("checked")) {
@@ -80,12 +65,16 @@ export class Atractions extends React.Component {
     console.log(this.state.prize);
   };
 
+  setCity = context => {
+    City = context.state.city;
+  };
+
   render() {
     return (
       <MyContext.Consumer>
         {context => (
           <div className="wrapper" key="wrapper">
-            {(City = context.state.city)}
+            {this.setCity(context)}
             <Map
               google={this.props.google}
               zoom={14}
@@ -133,19 +122,30 @@ export class Atractions extends React.Component {
                   );
                 })}
               </ul>
-              <p>*proszę wybrać przynajmniej trzy atrakcje</p>
-              {this.state.show ? (
-                <button className="btn-select">
-                  <Link
-                    to="/summary"
-                    onClick={() => context.setAttrPrize(this.state.prize)}
-                  >
-                    Wybierz
-                  </Link>
-                </button>
-              ) : (
-                ""
-              )}
+              <p
+                style={{
+                  marginTop: 10,
+                  color: "gray",
+                  fontSize: 14,
+                  borderTop: "1px solid lightgray",
+                  width: "100%",
+                  paddingTop: 5
+                }}
+              >
+                * Proszę wybrać przynajmniej trzy atrakcje  
+              </p>
+              <Button
+                variant="contained"
+                color="secondary"
+                className="btn-select"
+                style={{ visibility: this.state.show ? "visible" : "hidden" }}
+                onClick={() => {
+                  context.setAttrPrize(this.state.prize);
+                  this.props.history.push(`/summary`);
+                }}
+              >
+                Wybierz
+              </Button>
             </section>
           </div>
         )}

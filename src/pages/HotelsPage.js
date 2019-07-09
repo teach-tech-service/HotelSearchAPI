@@ -2,7 +2,7 @@ import React from "react";
 import "./../App.css";
 import { MyContext } from "../components/providers/HotelProvider";
 import PrizeSlider from "./../components/PrizeSlider";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import data from "../data/data";
 import HotelItem from "../components/HotelItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
@@ -81,8 +81,6 @@ export class Hotels extends React.Component {
         console.log(`${this.state.min}   ${this.state.max}`);
       }
     );
-    //this.renderMarkers(this.state.min, this.state.max);
-    //this.renderHotels(this.state.min, this.state.max);
   };
 
   render() {
@@ -171,7 +169,7 @@ export class Hotels extends React.Component {
                   setHotelPrize(this.state.prize);
                   setHotelName(this.state.hotel.name);
                   setHotelDistance(this.state.hotel.distance);
-                  this.props.history.push(`/attractions/${city}`);
+                  this.props.history.push(`/atractions`);
                 }}
               >
                 Wybierz
