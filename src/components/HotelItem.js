@@ -5,10 +5,11 @@ export default function HotelItem(props) {
         <li
             className="items__item"
             onClick={e => {
-                props.test1(e);
+                props.setHotel(e);
+                props.onClick(props);
             }}
         >
-            <div className="item__info">
+            <div className={`item__info`}>
                 <p className="item__address">
                     <span>
                         <b>{props.name}</b>

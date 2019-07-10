@@ -1,7 +1,7 @@
 import React from "react";
 import "./../App.css";
 import atractions from "./../data/Atractions";
-import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import AttractionItem from "./../components/AttractionItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { MyContext } from "../components/providers/HotelProvider";
@@ -72,20 +72,12 @@ export class Atractions extends React.Component {
         }
     };
 
-    getAttrPrize = attr => {
-        /*
-        this.setState(prevState => {
-            prize: prevState.prize += attr.prize;
-        });
-        console.log(this.state.prize);
-        */
-    };
-
     render() {
         return (
             <MyContext.Consumer>
                 {context => (
                     <div className="wrapper" key="wrapper">
+                        {console.log(context.state.hotel.hotelName)}
                         <Map
                             google={this.props.google}
                             zoom={14}
@@ -126,7 +118,6 @@ export class Atractions extends React.Component {
                                             lat={item.location.latitude}
                                             lng={item.location.longitude}
                                             showBtn={this.showButton}
-                                            onClick={this.getAttrPrize}
                                             id={item.id}
                                         />
                                     ) : (
@@ -136,27 +127,25 @@ export class Atractions extends React.Component {
                             </ul>
                             <p>*proszę wybrać przynajmniej trzy atrakcje</p>
                             {this.state.show ? (
-                                <button className="btn-select">
-                                    <Link
-                                        to="/summary"
-                                        onClick={() => {
-                                            for (let [
-                                                index,
-                                                value
-                                            ] of this.state.atraction.attrPrizes.entries()) {
-                                                context.setAttrPrize(value);
-                                            }
-                                            for (let [
-                                                index,
-                                                value
-                                            ] of this.state.atraction.attrNames.entries()) {
-                                                context.setAttrName(value);
-                                            }
-                                        }}
-                                    >
-                                        Wybierz
-                                    </Link>
-                                </button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    className="btn-select"
+                                    onClick={() => {
+                                        for (let value of this.state.atraction
+                                            .attrPrizes) {
+                                            context.setAttrPrize(value);
+                                        }
+                                        for (let value of this.state.atraction
+                                            .attrNames) {
+                                            context.setAttrName(value);
+                                        }
+                                        this.props.history.push(`/summary`);
+                                    }}
+                                >
+                                    {" "}
+                                    Wybierz
+                                </Button>
                             ) : (
                                 ""
                             )}

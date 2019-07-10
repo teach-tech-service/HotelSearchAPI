@@ -6,7 +6,6 @@ export default function AtractionItem(props) {
             className="items__item"
             onClick={e => {
                 props.showBtn(e, props);
-                props.onClick(props);
             }}
         >
             <div className="item__info">
