@@ -13,7 +13,6 @@ export class Hotels extends React.Component {
         zoom: 15,
         show: false,
         selectedHotel: null,
-        itemsChecked: 0,
         prize: 0,
         hotel: {
             name: "",
@@ -23,48 +22,22 @@ export class Hotels extends React.Component {
         max: 400
     };
 
-    showButton = event => {
-        if (
-            !event.target.closest(".items__item").classList.contains("checked")
-        ) {
-            event.target.closest(".items__item").classList.add("checked");
-            this.setState(
-                {
-                    itemsChecked: this.state.itemsChecked + 1
-                },
-                () => {
-                    if (this.state.itemsChecked > 0) {
-                        this.setState({
-                            show: true
-                        });
-                    } else {
-                        this.setState({
-                            show: false
-                        });
-                    }
-                }
-            );
-        } else {
-            event.target.closest(".items__item").classList.remove("checked");
-            this.setState(
-                {
-                    itemsChecked: this.state.itemsChecked - 1
-                },
-                () => {
-                    if (this.state.itemsChecked > 0) {
-                        this.setState({
-                            show: true
-                        });
-                    } else {
-                        this.setState({
-                            show: false
-                        });
-                    }
-                }
-            );
-        }
+    selectItem = event => {
+        let hotel = data.filter(c => c.id == event.id)[0];
+
+        if (this.state.selectedHotel === null) {
+            this.setState({
+                selectedHotel: hotel,
+                show: true
+            });
+            this.setContextData(hotel);
+        } else
+            this.setState({
+                selectedHotel: null,
+                show: false
+            });
     };
-    getCenterMap = hotel => {
+    setContextData = hotel => {
         this.setState(prevState => {
             prevState.prize = hotel.prize;
             prevState.hotel.name = hotel.name;
@@ -77,13 +50,6 @@ export class Hotels extends React.Component {
             min: value[0] * 10,
             max: value[1] * 10
         }));
-    };
-
-    CheckItem = props => {
-        console.log(props.id);
-        data.map(item => {
-            console.log(item.classList);
-        });
     };
 
     render() {
@@ -128,7 +94,7 @@ export class Hotels extends React.Component {
                                             lat: item.location.latitude,
                                             lng: item.location.longitude
                                         }}
-                                        onClick={this.CheckItem}
+                                        onClick={() => this.selectItem(item)}
                                     />
                                 ) : null;
                             })}
@@ -141,18 +107,28 @@ export class Hotels extends React.Component {
                             <PrizeSlider onChange={this.HotelSearch} />
                             <ul className="items__list" id="items_list">
                                 {data.map(item => {
+                                    let isSelected = false;
+
+                                    if (
+                                        this.state.selectedHotel !== null &&
+                                        this.state.selectedHotel.id === item.id
+                                    )
+                                        isSelected = true;
+
                                     return item.city === city &&
                                         (item.prize > this.state.min &&
                                             item.prize < this.state.max) ? (
                                         <HotelItem
                                             key={`itemhot ${item.id}`}
+                                            id={item.id}
                                             name={item.location.name}
+                                            isSelected={isSelected}
                                             prize={item.prize}
                                             distance={item.location.distance}
                                             lat={item.location.latitude}
                                             lng={item.location.longitude}
-                                            setHotel={this.showButton}
-                                            onClick={this.getCenterMap}
+                                            setHotel={this.selectItem}
+                                            onClick={this.setContextData}
                                         />
                                     ) : null;
                                 })}

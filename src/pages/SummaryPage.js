@@ -1,8 +1,8 @@
 import React from "react";
 import "./../App.css";
 import { MyContext } from "../components/providers/HotelProvider";
-import AttractionItem from "./../components/AttractionItem";
-import HotelItem from "./../components/HotelItem";
+import SummaryAttr from "./../components/SummaryAttr";
+import SummaryHotel from "./../components/SummaryHotel";
 import { Link } from "react-router-dom";
 
 export default class Summary extends React.Component {
@@ -17,30 +17,24 @@ export default class Summary extends React.Component {
         return (
             <MyContext.Consumer>
                 {({
-                    state: {
-                        hotelPrize,
-                        attrPrizes,
-                        attrNames,
-                        hotelName,
-                        hotelDistance
-                    }
+                    state: { hotelPrize, attractions, hotelName, hotelDistance }
                 }) => (
                     <div>
                         <h1>Podsumowanie:</h1>
                         <p>Wybrałeś hotel:</p>
-                        <HotelItem
+                        <SummaryHotel
                             name={hotelName}
                             distance={hotelDistance}
                             prize={hotelPrize}
                         />
                         <p>Wybrałeś atrakcje:</p>
                         <div className="attr">
-                            {attrNames.map((item, index) => {
+                            {attractions.map(item => {
                                 return (
-                                    <AttractionItem
-                                        key={`key ${item}`}
-                                        name={item}
-                                        prize={attrPrizes[index]}
+                                    <SummaryAttr
+                                        key={`key ${item.id}`}
+                                        name={item.name}
+                                        prize={item.prize}
                                     />
                                 );
                             })}

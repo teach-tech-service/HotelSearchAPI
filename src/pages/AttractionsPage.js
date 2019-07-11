@@ -12,63 +12,29 @@ export class Atractions extends React.Component {
         lng: 19.944544,
         lat: 50.049683,
         itemsChecked: 0,
-        atraction: {
-            attrPrizes: [],
-            attrNames: [],
-            attrId: []
-        },
+        selectedAttr: [],
         prize: 0
     };
-    showButton = (event, attr) => {
-        if (
-            !event.target.closest(".items__item").classList.contains("checked")
-        ) {
-            event.target.closest(".items__item").classList.add("checked");
-            this.setState(
-                {
-                    itemsChecked: this.state.itemsChecked + 1,
-                    atraction: {
-                        attrId: [...this.state.atraction.attrId, attr.id],
-                        attrPrizes: [
-                            ...this.state.atraction.attrPrizes,
-                            attr.prize
-                        ],
-                        attrNames: [
-                            ...this.state.atraction.attrNames,
-                            attr.name
-                        ]
-                    }
-                },
-                () => {
-                    if (this.state.itemsChecked > 2) {
-                        this.setState(prevState => ({
-                            show: true
-                        }));
-                    } else {
-                        this.setState(prevState => ({
-                            show: false
-                        }));
-                    }
-                }
+    selectItem = event => {
+        let atraction = atractions.filter(c => c.id == event.id)[0];
+        let ifEx = this.state.selectedAttr.some(
+            item => item.id === atraction.id
+        );
+        if (ifEx) {
+            let filtered = this.state.selectedAttr.filter(
+                item => item.id !== atraction.id
             );
+            this.setState({
+                selectedAttr: filtered,
+                itemsChecked: filtered.length
+            });
         } else {
-            event.target.closest(".items__item").classList.remove("checked");
-            this.setState(
-                {
-                    itemsChecked: this.state.itemsChecked - 1
-                },
-                () => {
-                    if (this.state.itemsChecked > 2) {
-                        this.setState(prevState => ({
-                            show: true
-                        }));
-                    } else {
-                        this.setState(prevState => ({
-                            show: false
-                        }));
-                    }
-                }
-            );
+            let data = Object.assign([], this.state.selectedAttr);
+            data.push(event);
+            this.setState({
+                selectedAttr: data,
+                itemsChecked: data.length
+            });
         }
     };
 
@@ -77,7 +43,6 @@ export class Atractions extends React.Component {
             <MyContext.Consumer>
                 {context => (
                     <div className="wrapper" key="wrapper">
-                        {console.log(context.state.hotel.hotelName)}
                         <Map
                             google={this.props.google}
                             zoom={14}
@@ -97,6 +62,7 @@ export class Atractions extends React.Component {
                                             lat: item.location.latitude,
                                             lng: item.location.longitude
                                         }}
+                                        onClick={() => this.selectItem(item)}
                                     />
                                 ) : (
                                     ""
@@ -110,14 +76,19 @@ export class Atractions extends React.Component {
                         >
                             <ul className="items__list" id="items_list">
                                 {atractions.map(item => {
+                                    let isSelected = this.state.selectedAttr.some(
+                                        c => c.id == item.id
+                                    );
+
                                     return item.city === context.state.city ? (
                                         <AttractionItem
                                             key={`key ${item.id}`}
                                             name={item.name}
+                                            isSelected={isSelected}
                                             prize={item.prize}
                                             lat={item.location.latitude}
                                             lng={item.location.longitude}
-                                            showBtn={this.showButton}
+                                            showBtn={this.selectItem}
                                             id={item.id}
                                         />
                                     ) : (
@@ -126,20 +97,15 @@ export class Atractions extends React.Component {
                                 })}
                             </ul>
                             <p>*proszę wybrać przynajmniej trzy atrakcje</p>
-                            {this.state.show ? (
+                            {this.state.itemsChecked >= 3 ? (
                                 <Button
                                     variant="contained"
                                     color="secondary"
                                     className="btn-select"
                                     onClick={() => {
-                                        for (let value of this.state.atraction
-                                            .attrPrizes) {
-                                            context.setAttrPrize(value);
-                                        }
-                                        for (let value of this.state.atraction
-                                            .attrNames) {
-                                            context.setAttrName(value);
-                                        }
+                                        context.setAttractions(
+                                            this.state.selectedAttr
+                                        );
                                         this.props.history.push(`/summary`);
                                     }}
                                 >

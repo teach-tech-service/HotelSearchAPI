@@ -3,13 +3,13 @@ import React from "react";
 export default function HotelItem(props) {
     return (
         <li
-            className="items__item"
+            className={`items__item ${props.isSelected ? "checked" : null}`}
             onClick={e => {
-                props.setHotel(e);
+                props.setHotel(props);
                 props.onClick(props);
             }}
         >
-            <div className={`item__info`}>
+            <div className="item_info">
                 <p className="item__address">
                     <span>
                         <b>{props.name}</b>
