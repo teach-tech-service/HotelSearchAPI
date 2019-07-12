@@ -63,90 +63,66 @@ const styles = {
   }
 };
 
-class City extends React.Component {
-  state = {
-    location: {
-      Krakow: {
-        lng: 19.93689,
-        lat: 50.062342
-      },
-      Warszawa: {
-        lng: 21.023423,
-        lat: 52.23239
-      }
-    }
-  };
+const City = props => {
+  const { classes, history } = props;
+  return (
+    <React.Fragment>
+      <MyContext.Consumer>
+        {context => (
+          <Container maxWidth="xl" className={classes.container}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  className={classes.header}
+                >
+                  Wybierz miasto które chcesz odwiedzić
+                </Typography>
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <React.Fragment>
-        <MyContext.Consumer>
-          {context => (
-            <Container maxWidth="xl" className={classes.container}>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Typography
-                    variant="h5"
-                    component="h2"
-                    className={classes.header}
-                  >
-                    Wybierz miasto które chcesz odwiedzić
-                  </Typography>
-
-                  <React.Fragment>
-                    <FormControl className={classes.form}>
-                      <InputLabel>Miasto</InputLabel>
-                      <NativeSelect
-                        onChange={e => {
-                          context.setCity(e.target.value);
-                          switch (e.target.value) {
-                            case "Krakow":
-                              context.setMapCenter(
-                                this.state.location.Krakow.lat,
-                                this.state.location.Krakow.lng
-                              );
-                              break;
-                            case "Warszawa":
-                              context.setMapCenter(
-                                this.state.location.Warszawa.lat,
-                                this.state.location.Warszawa.lng
-                              );
-                              break;
-                            default:
-                              context.setMapCenter(
-                                this.state.location.Krakow.lat,
-                                this.state.location.Krakow.lng
-                              );
-                          }
-                        }}
-                      >
-                        <option value="" />
-                        <option value="Krakow">Krakow</option>
-                        <option value="Warszawa">Warszawa</option>
-                      </NativeSelect>
-                    </FormControl>
-                  </React.Fragment>
-                </CardContent>
-                <CardActions className={classes.cardFooter}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className={classes.btn}
-                    onClick={() => {
-                      this.props.history.push(`/hotels`);
-                    }}
-                  >
-                    Dalej
-                  </Button>
-                </CardActions>
-              </Card>
-            </Container>
-          )}
-        </MyContext.Consumer>
-      </React.Fragment>
-    );
-  }
-}
+                <React.Fragment>
+                  <FormControl className={classes.form}>
+                    <InputLabel>Miasto</InputLabel>
+                    <NativeSelect
+                      onChange={e => {
+                        context.setCity(e.target.value);
+                        switch (e.target.value) {
+                          case "Krakow":
+                            context.setMapCenter(50.062342, 19.93689);
+                            break;
+                          case "Warszawa":
+                            context.setMapCenter(52.23239, 21.023423);
+                            break;
+                          default:
+                            context.setMapCenter(50.062342, 19.93689);
+                        }
+                      }}
+                    >
+                      <option value="" />
+                      <option value="Krakow">Krakow</option>
+                      <option value="Warszawa">Warszawa</option>
+                    </NativeSelect>
+                  </FormControl>
+                </React.Fragment>
+              </CardContent>
+              <CardActions className={classes.cardFooter}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.btn}
+                  onClick={() => {
+                    history.push(`/hotels`);
+                  }}
+                >
+                  Dalej
+                </Button>
+              </CardActions>
+            </Card>
+          </Container>
+        )}
+      </MyContext.Consumer>
+    </React.Fragment>
+  );
+};
 
 export default withStyles(styles)(withRouter(City));
