@@ -166,5 +166,5 @@ export class Hotels extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyDzGLroP91cG9fH6lP5n1kkazfwptaaVr8"
+    apiKey: "AIzaSyDzGLroP91cG9fH6lP5n1kkazfwptaaVr8"
 })(withRouter(Hotels));
