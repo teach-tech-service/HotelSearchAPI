@@ -1,6 +1,6 @@
 import React from "react";
 import "./../App.css";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { MyContext } from "../components/providers/HotelProvider";
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";

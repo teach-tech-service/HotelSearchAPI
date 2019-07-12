@@ -3,10 +3,9 @@ import React from "react";
 export default function AtractionItem(props) {
     return (
         <li
-            className="items__item"
+            className={`items__item ${props.isSelected ? "checked" : null}`}
             onClick={e => {
-                props.showBtn(e, props);
-                props.onClick(props);
+                props.showBtn(props);
             }}
         >
             <div className="item__info">

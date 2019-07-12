@@ -36,7 +36,7 @@
 
 .items__item {
   position: relative;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid darkgray;
   display: flex;
   align-items: center;
   padding: 20px 15px;
@@ -44,7 +44,6 @@
 }
 
 .items__item:hover {
-  background-color: lightgray;
   cursor: pointer;
 }
 
@@ -96,6 +95,8 @@
 
 .summary-btns {
   display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
 }
 
 /********Style for PrizeSlider**********/
