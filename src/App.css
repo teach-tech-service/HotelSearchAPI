@@ -91,6 +91,7 @@
 .attr {
   height: 50%;
   overflow-y: scroll;
+  max-height: 350px;
 }
 
 .summary-btns {

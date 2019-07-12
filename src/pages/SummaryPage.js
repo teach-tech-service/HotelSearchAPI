@@ -3,7 +3,6 @@ import "./../App.css";
 import { MyContext } from "../components/providers/HotelProvider";
 import SummaryAttr from "./../components/SummaryAttr";
 import SummaryHotel from "./../components/SummaryHotel";
-import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -92,7 +91,7 @@ const Summary = props => {
               <div
                 className="attr"
                 style={{
-                  overflowY: attractions.length !== 0 ? "hidden" : "scroll"
+                  overflowY: attractions.length !== 0 ? "scroll" : "hidden"
                 }}
               >
                 {attractions.length !== 0 ? (

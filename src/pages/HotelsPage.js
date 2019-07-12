@@ -3,7 +3,7 @@ import "./../App.css";
 import { MyContext } from "../components/providers/HotelProvider";
 import PrizeSlider from "./../components/PrizeSlider";
 import { withRouter } from "react-router-dom";
-import data from "../data/data";
+import { hotels } from "../data/data";
 import HotelItem from "../components/HotelItem";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import Button from "@material-ui/core/Button";
@@ -22,7 +22,7 @@ export class Hotels extends React.Component {
   };
 
   selectItem = event => {
-    let hotel = data.filter(c => c.id == event.id)[0];
+    let hotel = hotels.filter(c => c.id == event.id)[0];
 
     if (this.state.selectedHotel === null) {
       this.setState({
@@ -74,7 +74,7 @@ export class Hotels extends React.Component {
               }}
               disableDefaultUI
             >
-              {data.map(item => {
+              {hotels.map(item => {
                 return item.city === city &&
                   (item.prize >= this.state.min &&
                     item.prize <= this.state.max) ? (
@@ -102,7 +102,7 @@ export class Hotels extends React.Component {
             >
               <PrizeSlider onChange={this.HotelSearch} />
               <ul className="items__list" id="items_list">
-                {data.map(item => {
+                {hotels.map(item => {
                   let isSelected = false;
 
                   if (
@@ -166,5 +166,5 @@ export class Hotels extends React.Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyDzGLroP91cG9fH6lP5n1kkazfwptaaVr8"
+  apiKey: "AIzaSyDzGLroP91cG9fH6lP5n1kkazfwptaaVr8"
 })(withRouter(Hotels));

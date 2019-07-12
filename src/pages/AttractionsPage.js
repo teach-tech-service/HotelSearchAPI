@@ -59,11 +59,8 @@ export class Atractions extends React.Component {
                     name={item.location.name}
                     icon={{
                       url: "/img/monuments-icon.png",
-                      scaledSize: new google.maps.Size(
-                          32,
-                          32
-                      )
-                  }}
+                      scaledSize: new google.maps.Size(32, 32)
+                    }}
                     position={{
                       lat: item.location.latitude,
                       lng: item.location.longitude
