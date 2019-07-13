@@ -134,10 +134,10 @@ export class Hotels extends React.Component {
                                         <HotelItem
                                             key={`itemhot ${item.id}`}
                                             id={item.id}
-                                            name={item.location.name}
+                                            name={item.name}
                                             isSelected={isSelected}
                                             prize={item.prize}
-                                            distance={item.location.distance}
+                                            distance={item.distance}
                                             lat={item.location.latitude}
                                             lng={item.location.longitude}
                                             setHotel={this.selectItem}
