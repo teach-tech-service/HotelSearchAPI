@@ -12,10 +12,10 @@ export class Hotels extends React.Component {
     state = {
         show: false,
         selectedHotel: null,
-        prize: 0,
         hotel: {
             name: "",
-            distance: 0
+            distance: 0,
+            prize: 0
         },
         min: 200,
         max: 400
@@ -23,6 +23,8 @@ export class Hotels extends React.Component {
 
     selectItem = event => {
         let hotel = hotels.filter(c => c.id == event.id)[0];
+        console.log(event);
+        console.log(hotel);
 
         if (this.state.selectedHotel === null) {
             this.setState({
@@ -45,10 +47,11 @@ export class Hotels extends React.Component {
     };
     setContextData = hotel => {
         this.setState(prevState => {
-            prevState.prize = hotel.prize;
+            prevState.hotel.prize = hotel.prize;
             prevState.hotel.name = hotel.name;
             prevState.hotel.distance = hotel.distance;
         });
+        console.log(this.state);
     };
 
     HotelSearch = value => {
@@ -96,11 +99,15 @@ export class Hotels extends React.Component {
                                                 32
                                             )
                                         }}
+                                        distance={item.location.distance}
                                         position={{
                                             lat: item.location.latitude,
                                             lng: item.location.longitude
                                         }}
-                                        onClick={() => this.selectItem(item)}
+                                        onClick={() => {
+                                            this.selectItem(item);
+                                            this.setContextData(item);
+                                        }}
                                     />
                                 ) : null;
                             })}
@@ -161,7 +168,7 @@ export class Hotels extends React.Component {
                                         : "hidden"
                                 }}
                                 onClick={() => {
-                                    setHotelPrize(this.state.prize);
+                                    setHotelPrize(this.state.hotel.prize);
                                     setHotelName(this.state.hotel.name);
                                     setHotelDistance(this.state.hotel.distance);
                                     this.props.history.push(`/atractions`);
